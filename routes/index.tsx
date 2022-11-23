@@ -1,4 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
+import Input from "../islands/Input.tsx";
 
 export default function Terminal() {
   return (
@@ -8,7 +9,7 @@ export default function Terminal() {
       </Head>
       <main>
         <div class="text-blue-400">~</div> 
-        <span class="text-green-400">{'>'}</span>
+        <span class="text-green-400">{'> '}</span><Input />
       </main>
     </div>
   );
