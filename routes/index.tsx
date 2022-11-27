@@ -8,8 +8,9 @@ export default function Terminal() {
         <title>JG Terminal</title>
       </Head>
       <main>
-        <div class="text-blue-400">~</div> 
-        <span class="text-green-400">{'> '}</span><Input />
+        <div class="text-blue-400">~</div>
+        <span class="text-green-400">{'> '}</span> 
+        <Input />
       </main>
     </div>
   );

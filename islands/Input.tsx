@@ -1,32 +1,30 @@
 import { useEffect, useState } from "preact/hooks";
 
 export default function Input() {
-    const [value, setValue] = useState('')
-    const [inputSize, setInputSize] = useState(1)
+    const [input, setInput] = useState('')
 
-    const inputHandler = (event: Event) => {
-    
-        console.log(event)
+    useEffect (() => {
+        focusInput()
+    })
+
+    const focusInput = () => {
+        document.getElementById('input')?.focus()
     }
 
-    const onKeyEvent = (event: KeyboardEvent) => {
+    const inputHandler = (event: KeyboardEvent) => {
+        console.log(event)        
         if (event.key.length === 1) {
-            setValue(value + event.key)
-            setInputSize(value.length)
-            console.log(value)
+            setInput(input + event.key)
+        }
+        if (event.code === 'Backspace'){
+            setInput(input.slice(0, -1))
+        }
+        if (event.code === 'Space') {
+            setInput(input + '\xa0')
         }
     }
 
     return (
-        <>
-            <input 
-                class="bg-black text-white appearance-none flex-grow" 
-                type="text"
-                value={value}
-                onChange={inputHandler}
-                onKeyDown={onKeyEvent}
-                size={inputSize}
-            />
-        </>
+        <span onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>{input}</span>
     )
 }
