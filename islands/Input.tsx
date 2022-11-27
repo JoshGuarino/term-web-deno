@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import { Caret } from "../components/Caret.tsx";
 
 export default function Input() {
     const [input, setInput] = useState('')
@@ -25,6 +26,6 @@ export default function Input() {
     }
 
     return (
-        <span onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>{input}</span>
+        <span class="outline-none" onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>{input}<Caret /></span>
     )
 }
