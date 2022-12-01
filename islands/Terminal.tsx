@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import { Caret } from "../components/Caret.tsx";
 import Output, { historyEntry } from "../islands/Output.tsx";
 import Prompt from "../islands/Prompt.tsx";
-import { commandExists, help } from "../utils/commander.ts";
+import { commandExists, help, syntaxHighlighter } from "../utils/commander.tsx";
 
 export const commands = ['clear', 'help']
 
@@ -72,7 +72,7 @@ export default function Terminal() {
     return (
         <span class="outline-none" onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>
             <Output history={outputHistory} user={user} host={host} />
-            <Prompt user={user} host={host} />{input}<Caret />
+            <Prompt user={user} host={host} />{syntaxHighlighter(input)}<Caret />
         </span>
     )
 }

@@ -1,6 +1,6 @@
 import Prompt from "../islands/Prompt.tsx";
 import { useEffect, useState } from "preact/hooks";
-import { commandExists } from "../utils/commander.ts";
+import { commandExists, syntaxHighlighter } from "../utils/commander.tsx";
 
 interface outputProps {
     history: Array<historyEntry>
@@ -19,7 +19,7 @@ export default function Output(props: outputProps) {
             {props.history.map( entry => (
                     <>
                         <div>
-                            <Prompt user={props.user} host={props.host}/>{entry.command}
+                            <Prompt user={props.user} host={props.host}/>{syntaxHighlighter(entry.command)}
                         </div>
                         <div>
                             { !commandExists(entry.command) ? `feenix: command '${entry.command}' not found` : `${entry.output}` }
