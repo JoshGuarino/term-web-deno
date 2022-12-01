@@ -1,4 +1,5 @@
 export enum Commnands {
+    '',
     clear,
     help,
 }

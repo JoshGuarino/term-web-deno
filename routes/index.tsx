@@ -11,7 +11,7 @@ export default function Home() {
         style="background-image: url('city.jpeg');"
         class="bg-gray-800 h-screen p-2 text-white font-bold flex justify-evenly items-center"
       >
-        <div class="bg-black opacity-80 border-2 rounded-lg h-4/5 w-4/5 p-2">
+        <div class="bg-black opacity-80 border-2 rounded-lg h-4/5 w-4/5 p-2 overflow-auto">
           <Terminal />
         </div>
       </body>

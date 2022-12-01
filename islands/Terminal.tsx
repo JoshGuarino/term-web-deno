@@ -15,7 +15,7 @@ export default function Terminal() {
 
     useEffect (() => {
         focusInput()
-    }, [input])
+    }, [input, commandHistory])
 
     const focusInput = () => {
         document.getElementById('input')?.focus()
@@ -28,42 +28,45 @@ export default function Terminal() {
         switch (event.code) {
             case 'Backspace':
                 setInput(input.slice(0, -1))
-                break;
+                break
             case 'Space':
                 setInput(input + '\xa0')
-                break;
+                break
             case 'Enter':
                 submitHandler(input)
-                break;
+                break
         }
     }
 
     const submitHandler = (command: string) => {
-        if (command === '') return
+        // if (command === '') return
 
         const commandOutput = commandHandler(command)
         commandHistory.push(command)
         outputHistory.push({command: command, output: commandOutput})
-        setInput('')
+        input !== '' ? setInput('') : setCommandHistory([...commandHistory])
     }
 
     const commandHandler = (command: string) => {
         let commandOutput = ''
 
         if (!commandExists(command)){
+            console.log(command)
             setInput('')
             return 'failure'
         } 
 
         switch(command) {
+            case '':
+                break
             case 'clear':
                 setOutputHistory([])
-                break;
+                break
             case 'help':
                 commandOutput = help()
                 break;
             case 'default':
-                break;
+                break
         }
 
         return commandOutput
