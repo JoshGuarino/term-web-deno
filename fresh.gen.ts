@@ -3,27 +3,23 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import config from "./deno.json" assert { type: "json" };
-import * as $0 from "./routes/[name].tsx";
-import * as $1 from "./routes/api/joke.ts";
-import * as $2 from "./routes/index.tsx";
-import * as $$0 from "./islands/Counter.tsx";
-import * as $$1 from "./islands/History.tsx";
-import * as $$2 from "./islands/Output.tsx";
-import * as $$3 from "./islands/Prompt.tsx";
-import * as $$4 from "./islands/Terminal.tsx";
+import * as $0 from "./routes/api/joke.ts";
+import * as $1 from "./routes/index.tsx";
+import * as $$0 from "./islands/History.tsx";
+import * as $$1 from "./islands/Output.tsx";
+import * as $$2 from "./islands/Prompt.tsx";
+import * as $$3 from "./islands/Terminal.tsx";
 
 const manifest = {
   routes: {
-    "./routes/[name].tsx": $0,
-    "./routes/api/joke.ts": $1,
-    "./routes/index.tsx": $2,
+    "./routes/api/joke.ts": $0,
+    "./routes/index.tsx": $1,
   },
   islands: {
-    "./islands/Counter.tsx": $$0,
-    "./islands/History.tsx": $$1,
-    "./islands/Output.tsx": $$2,
-    "./islands/Prompt.tsx": $$3,
-    "./islands/Terminal.tsx": $$4,
+    "./islands/History.tsx": $$0,
+    "./islands/Output.tsx": $$1,
+    "./islands/Prompt.tsx": $$2,
+    "./islands/Terminal.tsx": $$3,
   },
   baseUrl: import.meta.url,
   config,

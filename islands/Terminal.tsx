@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import { Caret } from "../components/Caret.tsx";
 import Output, { historyEntry } from "../islands/Output.tsx";
 import Prompt from "../islands/Prompt.tsx";
-import { commandExists, commandRouter } from "../utils/commander.ts";
+import { commandExists, help } from "../utils/commander.ts";
 
 export const commands = ['clear', 'help']
 
@@ -38,30 +38,35 @@ export default function Terminal() {
         }
     }
 
-    const submitHandler = (submitCommand: string) => {
-        if (submitCommand === '') return
+    const submitHandler = (command: string) => {
+        if (command === '') return
 
-        if (!commandExists(submitCommand)) {
-            commandHistory.push(submitCommand)
-            outputHistory.push({command: submitCommand, output: 'failure'})
-            setInput('')
-            return
-        }
-        commandHandler(submitCommand)
-        commandHistory.push(submitCommand)
-        outputHistory.push({command: submitCommand, output: 'success'})
+        const commandOutput = commandHandler(command)
+        commandHistory.push(command)
+        outputHistory.push({command: command, output: commandOutput})
         setInput('')
     }
 
     const commandHandler = (command: string) => {
+        let commandOutput = ''
+
+        if (!commandExists(command)){
+            setInput('')
+            return 'failure'
+        } 
+
         switch(command) {
             case 'clear':
                 setOutputHistory([])
                 break;
+            case 'help':
+                commandOutput = help()
+                break;
             case 'default':
-                commandRouter(command)
                 break;
         }
+
+        return commandOutput
     }
 
     return (
