@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <html>
       <Head>
-        <title>Feenix Terminal</title>
+        <title>JG Terminal</title>
       </Head>
       <body 
         style="background-image: url('city.jpg');"

@@ -13,7 +13,7 @@ export default function Terminal() {
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
     const [histIndex, setHistIndex] = useState<number>(0)
     const [user, setUser] = useState<string>('guest')
-    const [host, setHost] = useState<string>('feenix')
+    const [host, setHost] = useState<string>('jg-term')
 
     useEffect (() => {
         focusInput()
