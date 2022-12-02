@@ -11,6 +11,7 @@ export default function Terminal() {
     const [input, setInput] = useState<string>('')
     const [commandHistory, setCommandHistory] = useState<string[]>(['banner'])
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
+    const [histIndex, setHistIndex] = useState<number>(0)
     const [user, setUser] = useState<string>('guest')
     const [host, setHost] = useState<string>('feenix')
 
@@ -36,13 +37,26 @@ export default function Terminal() {
             case 'Enter':
                 submitHandler(input)
                 break
+            case 'ArrowUp':
+                handleArrowUp()
+                break
+            case 'ArrowDown':
+                handleArrowDown()
+                break
         }
+    }
+
+    const handleArrowUp = () => {
+    }
+
+    const handleArrowDown = () => {
     }
 
     const submitHandler = (command: string) => {
         const commandOutput = commandHandler(command)
-        console.log(commandOutput)
-        commandHistory.push(command)
+        if (command !== '') {
+            commandHistory.push(command)
+        }
         outputHistory.push({command: command, output: commandOutput})
         input !== '' ? setInput('') : setCommandHistory([...commandHistory])
     }
@@ -52,7 +66,7 @@ export default function Terminal() {
 
         if (!commandExists(command)){
             setInput('')
-            return []
+            return [<></>]
         } 
 
         switch(command) {

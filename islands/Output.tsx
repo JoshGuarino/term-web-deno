@@ -19,12 +19,12 @@ export default function Output(props: outputProps) {
             {props.history.map( entry => (
                     <div>
                         <div>
-                            <Prompt user={props.user} host={props.host}/>{highlightCommandExists(entry.command)}
+                            <Prompt user={props.user} host={props.host}/>{entry.command}
                         </div>
                             { 
                                 commandExists(entry.command) ?
                                 entry.output.map(entry =><div class="m-4">{entry}</div>) :
-                                <div class="m-4">{highlightRed(props.host)}: command '{entry.command}' not found, type '{highlightBlue('help')}' for commands.</div>
+                                <div class="m-4">{highlightRed(props.host)}: command '{highlightRed(entry.command)}' not found, type '{highlightBlue('help')}' for commands.</div>
                             }
                     </div>
                 )

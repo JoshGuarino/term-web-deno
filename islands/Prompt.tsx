@@ -1,4 +1,4 @@
-import { highlightBlue, highlightGreen, highlightRed } from "../utils/highlighter.tsx";
+import { highlightBlue, highlightRed } from "../utils/highlighter.tsx";
 
 export interface propmptProps {
     user: string
@@ -7,8 +7,8 @@ export interface propmptProps {
 
 export default function Prompt(props: propmptProps) {
     return (
-        <span class="text-lg">
-            <span>{highlightRed(props.user)}</span>
+        <span>
+            <span>{highlightBlue(props.user)}</span>
             <span>@</span>
             <span>{highlightRed(props.host)}</span>
             <span>:</span>
