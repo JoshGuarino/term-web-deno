@@ -12,7 +12,7 @@ export default function Terminal() {
     const [commandHistory, setCommandHistory] = useState<string[]>(['banner'])
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
     const [user, setUser] = useState<string>('guest')
-    const [host, setHost] = useState<string>('feenix.term')
+    const [host, setHost] = useState<string>('feenix')
 
     useEffect (() => {
         focusInput()
