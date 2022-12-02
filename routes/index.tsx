@@ -8,7 +8,7 @@ export default function Home() {
         <title>Feenix Terminal</title>
       </Head>
       <body 
-        style="background-image: url('particles.jpg');"
+        style="background-image: url('city.jpg');"
         class="bg-gray-800 h-screen p-6 text-white font-bold flex justify-evenly items-center bg-cover"
       >
         <div class="bg-black opacity-80 border-2 rounded-lg h-full w-full p-2 overflow-auto">

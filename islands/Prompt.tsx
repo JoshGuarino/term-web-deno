@@ -1,3 +1,4 @@
+import { highlightBlue, highlightGreen, highlightRed } from "../utils/highlighter.tsx";
 
 export interface propmptProps {
     user: string
@@ -6,11 +7,13 @@ export interface propmptProps {
 
 export default function Prompt(props: propmptProps) {
     return (
-        <>
-            <span class="text-blue-400">{props.user}@{props.host}</span>
+        <span class="text-lg">
+            <span>{highlightRed(props.user)}</span>
+            <span>@</span>
+            <span>{highlightRed(props.host)}</span>
             <span>:</span>
-            <span class="text-blue-400">~</span>
+            <span>{highlightBlue('~')}</span>
             <span>$ </span>
-        </>
+        </span>
     )
 }

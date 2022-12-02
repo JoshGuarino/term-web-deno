@@ -1,6 +1,6 @@
 import Prompt from "../islands/Prompt.tsx";
-import { useEffect, useState } from "preact/hooks";
-import { commandExists, syntaxHighlighter } from "../utils/commander.tsx";
+import { commandExists } from "../utils/commander.tsx";
+import { highlightCommandExists, highlightBlue, highlightGreen, highlightRed } from "../utils/highlighter.tsx";
 
 interface outputProps {
     history: Array<historyEntry>
@@ -10,21 +10,23 @@ interface outputProps {
 
 export interface historyEntry {
     command: string
-    output: string
+    output: preact.JSX.Element[]
 }
 
 export default function Output(props: outputProps) {
     return(
         <div>
             {props.history.map( entry => (
-                    <>
+                    <div>
                         <div>
-                            <Prompt user={props.user} host={props.host}/>{syntaxHighlighter(entry.command)}
+                            <Prompt user={props.user} host={props.host}/>{highlightCommandExists(entry.command)}
                         </div>
-                        <div>
-                            { !commandExists(entry.command) ? `feenix: command '${entry.command}' not found` : `${entry.output}` }
-                        </div>
-                    </>
+                            { 
+                                commandExists(entry.command) ?
+                                entry.output.map(entry =><div class="m-4">{entry}</div>) :
+                                <div class="m-4">{highlightRed(props.host)}: command '{entry.command}' not found, type '{highlightBlue('help')}' for commands.</div>
+                            }
+                    </div>
                 )
             )}
         </div>

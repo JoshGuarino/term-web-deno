@@ -2,14 +2,15 @@ import { useEffect, useState } from "preact/hooks";
 import { Caret } from "../components/Caret.tsx";
 import Output, { historyEntry } from "../islands/Output.tsx";
 import Prompt from "../islands/Prompt.tsx";
-import { commandExists, help, syntaxHighlighter } from "../utils/commander.tsx";
+import { banner, commandExists, help } from "../utils/commander.tsx";
+import { highlightCommandExists } from "../utils/highlighter.tsx";
 
 export const commands = ['clear', 'help']
 
 export default function Terminal() {
     const [input, setInput] = useState<string>('')
-    const [commandHistory, setCommandHistory] = useState<Array<string>>([])
-    const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([])
+    const [commandHistory, setCommandHistory] = useState<string[]>(['banner'])
+    const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
     const [user, setUser] = useState<string>('guest')
     const [host, setHost] = useState<string>('feenix.term')
 
@@ -39,32 +40,31 @@ export default function Terminal() {
     }
 
     const submitHandler = (command: string) => {
-        // if (command === '') return
-
         const commandOutput = commandHandler(command)
+        console.log(commandOutput)
         commandHistory.push(command)
         outputHistory.push({command: command, output: commandOutput})
         input !== '' ? setInput('') : setCommandHistory([...commandHistory])
     }
 
     const commandHandler = (command: string) => {
-        let commandOutput = ''
+        let commandOutput = [<></>]
 
         if (!commandExists(command)){
-            console.log(command)
             setInput('')
-            return 'failure'
+            return []
         } 
 
         switch(command) {
-            case '':
-                break
             case 'clear':
                 setOutputHistory([])
                 break
             case 'help':
                 commandOutput = help()
-                break;
+                break
+            case 'banner':
+                commandOutput = banner()
+                break
             case 'default':
                 break
         }
@@ -75,7 +75,7 @@ export default function Terminal() {
     return (
         <span class="outline-none" onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>
             <Output history={outputHistory} user={user} host={host} />
-            <Prompt user={user} host={host} />{syntaxHighlighter(input)}<Caret />
+            <Prompt user={user} host={host} />{highlightCommandExists(input)}<Caret />
         </span>
     )
 }
