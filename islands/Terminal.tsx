@@ -68,8 +68,8 @@ export default function Terminal() {
     }
 
     const submitHandler = (command: string) => {
-        const output = [<></>]
-        commandExists(command) ? commandRouter(command) : setInput('')
+        let output = [<></>]
+        commandExists(command) ? output = commandRouter(command) : setInput('')
         if (command === 'clear') {
             setOutputHistory([])
         }
