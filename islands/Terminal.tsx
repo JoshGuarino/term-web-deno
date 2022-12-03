@@ -11,7 +11,7 @@ export default function Terminal() {
     const [input, setInput] = useState<string>('')
     const [commandHistory, setCommandHistory] = useState<string[]>(['banner'])
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
-    const [histIndex, setHistIndex] = useState<number>(0)
+    const [commIndex, setCommIndex] = useState<number>(0)
     const [user, setUser] = useState<string>('guest')
     const [host, setHost] = useState<string>('jg-term')
 
@@ -47,6 +47,14 @@ export default function Terminal() {
     }
 
     const handleArrowUp = () => {
+        console.log(commIndex, commandHistory)
+        if (commIndex > 0) {
+            setCommIndex(commIndex - 1)
+            setInput(commandHistory[commIndex])
+            return
+        }
+        setCommIndex(0)
+        setInput(commandHistory[0])
     }
 
     const handleArrowDown = () => {
@@ -59,6 +67,7 @@ export default function Terminal() {
         }
         outputHistory.push({command: command, output: commandOutput})
         input !== '' ? setInput('') : setCommandHistory([...commandHistory])
+        setCommIndex(commandHistory.length-1)
     }
 
     const commandHandler = (command: string) => {

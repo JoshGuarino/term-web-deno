@@ -20,7 +20,7 @@ export const help = () => {
 export const banner = () => {
     return [
         <span class="text-4xl">Welcome to {highlightRed('JG Terminal')}!</span>, 
-        <img class="border-2 rounded-xl border-red-400" src="feenix.jpg" alt="feenix" height="500px" width="500px" />, 
+        <img class="border-2 rounded-xl border-red-400 h-1/3 w-1/3" src="feenix.jpg" alt="feenix" />, 
         <span>Type '{highlightBlue('help')}' to see list of available commands.</span>,
     ]
 }
