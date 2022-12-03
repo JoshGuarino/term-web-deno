@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import { Caret } from "../components/Caret.tsx";
 import Output, { historyEntry } from "../islands/Output.tsx";
 import Prompt from "../islands/Prompt.tsx";
-import { banner, commandExists, help } from "../utils/commander.tsx";
+import { banner, commandExists, commandRouter, help } from "../utils/commander.tsx";
 import { highlightCommandExists } from "../utils/highlighter.tsx";
 
 export const commands = ['clear', 'help']
@@ -13,7 +13,7 @@ export default function Terminal() {
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
     const [commIndex, setCommIndex] = useState<number>(0)
     const [user, setUser] = useState<string>('guest')
-    const [host, setHost] = useState<string>('jg-term')
+    const [host, setHost] = useState<string>('jg-term.deno.dev')
 
     useEffect (() => {
         focusInput()
@@ -68,38 +68,17 @@ export default function Terminal() {
     }
 
     const submitHandler = (command: string) => {
-        const commandOutput = commandHandler(command)
+        const output = [<></>]
+        commandExists(command) ? commandRouter(command) : setInput('')
+        if (command === 'clear') {
+            setOutputHistory([])
+        }
         if (command !== '') {
             commandHistory.push(command)
         }
-        outputHistory.push({command: command, output: commandOutput})
+        outputHistory.push({command: command, output: output})
         input !== '' ? setInput('') : setCommandHistory([...commandHistory])
         setCommIndex(commandHistory.length-1)
-    }
-
-    const commandHandler = (command: string) => {
-        let commandOutput = [<></>]
-
-        if (!commandExists(command)){
-            setInput('')
-            return [<></>]
-        } 
-
-        switch(command) {
-            case 'clear':
-                setOutputHistory([])
-                break
-            case 'help':
-                commandOutput = help()
-                break
-            case 'banner':
-                commandOutput = banner()
-                break
-            case 'default':
-                break
-        }
-
-        return commandOutput
     }
 
     return (
