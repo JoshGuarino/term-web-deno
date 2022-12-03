@@ -47,7 +47,6 @@ export default function Terminal() {
     }
 
     const handleArrowUp = () => {
-        console.log(commIndex, commandHistory)
         if (commIndex > 0) {
             setCommIndex(commIndex - 1)
             setInput(commandHistory[commIndex])
@@ -58,6 +57,14 @@ export default function Terminal() {
     }
 
     const handleArrowDown = () => {
+        const lastIndex = commandHistory.length - 1
+        if (commIndex < lastIndex) {
+            setCommIndex(commIndex + 1)
+            setInput(commandHistory[commIndex])
+            return
+        }
+        setInput(commandHistory[lastIndex])
+        setCommIndex(lastIndex)
     }
 
     const submitHandler = (command: string) => {
