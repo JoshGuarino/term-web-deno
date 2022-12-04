@@ -1,14 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
 import { Caret } from "../components/Caret.tsx";
-import Output, { historyEntry } from "../islands/Output.tsx";
+import Output from "../islands/Output.tsx";
 import Prompt from "../islands/Prompt.tsx";
 import { banner, commandExists, commandRouter } from "../utils/commander.tsx";
 import { highlightCommandExists } from "../utils/highlighter.tsx";
-
-export interface terminalProps {
-    user: string
-    host: string
-}
+import { historyEntry, terminalProps } from "../utils/types.ts";
 
 export default function Terminal(props: terminalProps) {
     const [input, setInput] = useState<string>('')

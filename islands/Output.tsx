@@ -1,17 +1,7 @@
 import Prompt from "../islands/Prompt.tsx";
 import { commandExists } from "../utils/commander.tsx";
-import { highlightCommandExists, highlightBlue, highlightGreen, highlightRed } from "../utils/highlighter.tsx";
-
-interface outputProps {
-    history: Array<historyEntry>
-    user: string
-    host: string
-}
-
-export interface historyEntry {
-    command: string
-    output: preact.JSX.Element[]
-}
+import { highlightBlue, highlightRed } from "../utils/highlighter.tsx";
+import { outputProps } from "../utils/types.ts";
 
 export default function Output(props: outputProps) {
     return(
