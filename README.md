@@ -1,8 +1,13 @@
-# fresh project
+# [JG | Terminal](https://jg-term.deno.dev/)
 
-### Usage
+## My attempt on a terminal style website 
+<br />
 
-Start the project:
+### Tech used
+- Deno (https://deno.land/) 
+- Fresh (https://fresh.deno.dev/)
+
+### Quick Start
 
 ```
 deno task start

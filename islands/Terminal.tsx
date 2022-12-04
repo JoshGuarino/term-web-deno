@@ -2,18 +2,21 @@ import { useEffect, useState } from "preact/hooks";
 import { Caret } from "../components/Caret.tsx";
 import Output, { historyEntry } from "../islands/Output.tsx";
 import Prompt from "../islands/Prompt.tsx";
-import { banner, commandExists, commandRouter, help } from "../utils/commander.tsx";
+import { banner, commandExists, commandRouter } from "../utils/commander.tsx";
 import { highlightCommandExists } from "../utils/highlighter.tsx";
 
-export const commands = ['clear', 'help']
+export interface terminalProps {
+    user: string
+    host: string
+}
 
-export default function Terminal() {
+export default function Terminal(props: terminalProps) {
     const [input, setInput] = useState<string>('')
     const [commandHistory, setCommandHistory] = useState<string[]>(['banner'])
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
     const [commIndex, setCommIndex] = useState<number>(0)
-    const [user, setUser] = useState<string>('guest')
-    const [host, setHost] = useState<string>('jg-term.deno.dev')
+    const [user, setUser] = useState<string>(props.user)
+    const [host, setHost] = useState<string>(props.host)
 
     useEffect (() => {
         focusInput()
@@ -63,8 +66,8 @@ export default function Terminal() {
             setInput(commandHistory[commIndex])
             return
         }
-        setInput(commandHistory[lastIndex])
         setCommIndex(lastIndex)
+        setInput(commandHistory[lastIndex])
     }
 
     const submitHandler = (command: string) => {
