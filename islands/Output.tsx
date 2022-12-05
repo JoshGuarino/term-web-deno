@@ -14,7 +14,7 @@ export default function Output(props: outputProps) {
                             { 
                                 commandExists(entry.command) ?
                                 entry.output.map(entry =><div class="m-4">{entry}</div>) :
-                                <div class="m-4">{highlightBoxRed(props.host)} Command {highlightRed(entry.command)} not found, type '{highlightBlue('help')}' for commands.</div>
+                                <div class="m-4">{highlightBoxRed(props.host)} Command {highlightRed(entry.command)} not found, type {highlightBlue('help')} for commands.</div>
                             }
                     </div>
                 )
