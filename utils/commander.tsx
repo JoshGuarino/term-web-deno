@@ -8,9 +8,9 @@ export enum Commands {
     about = 'Display info about myself.',
     whoami = 'Print username.',
     linkedin = 'Opens linkedin profile page.',
-    github = 'Opens gitub profile page.',
-    repo = 'See the code for this applicaiton.',
-    date = 'Display currenty datetime.'
+    github = 'Opens github profile page.',
+    repo = 'See the code for this application.',
+    date = 'Display current datetime.'
 }
 
 export const commandExists = (command: string) => {
