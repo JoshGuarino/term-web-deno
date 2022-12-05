@@ -4,6 +4,7 @@ import Output from "../islands/Output.tsx";
 import Prompt from "../islands/Prompt.tsx";
 import { banner, commandExists, commandRouter } from "../utils/commander.tsx";
 import { highlightCommandExists } from "../utils/highlighter.tsx";
+import { LinkedList, ListNode } from "../utils/linkedList.ts";
 import { historyEntry, terminalProps } from "../utils/types.ts";
 
 export default function Terminal(props: terminalProps) {

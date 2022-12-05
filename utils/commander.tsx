@@ -74,7 +74,7 @@ export const linkedin = () => {
         window.open(`https://www.linkedin.com/in/${config.social.linkedin}`, '_blank');
     }, 500);
     return [
-        <span>Opening linkedin profile page ...</span>
+        <span>Opening linkedin profile page.</span>
     ]
 }
 
@@ -83,7 +83,7 @@ export const github = () => {
         window.open(`https://github.com/${config.social.github}`, '_blank');
     }, 500);
     return [
-        <span>Opening github profile page ...</span>
+        <span>Opening github profile page.</span>
     ]
 }
 
@@ -92,7 +92,7 @@ export const repo = () => {
         window.open('https://github.com/joshguarino/term-web-deno', '_blank');
     }, 500);
     return [
-        <span>Opening repo code for site ...</span>
+        <span>Opening repo code for site.</span>
     ]
 }
 
