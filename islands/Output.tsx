@@ -1,6 +1,6 @@
 import Prompt from "../islands/Prompt.tsx";
 import { commandExists } from "../utils/commander.tsx";
-import { highlightBlue, highlightRed } from "../utils/highlighter.tsx";
+import { highlightBlue, highlightBoxRed, highlightRed } from "../utils/highlighter.tsx";
 import { outputProps } from "../utils/types.ts";
 
 export default function Output(props: outputProps) {
@@ -14,7 +14,7 @@ export default function Output(props: outputProps) {
                             { 
                                 commandExists(entry.command) ?
                                 entry.output.map(entry =><div class="m-4">{entry}</div>) :
-                                <div class="m-4">{highlightRed(props.host)}: command '{highlightRed(entry.command)}' not found, type '{highlightBlue('help')}' for commands.</div>
+                                <div class="m-4">{highlightBoxRed(props.host)} Command {highlightRed(entry.command)} not found, type '{highlightBlue('help')}' for commands.</div>
                             }
                     </div>
                 )
