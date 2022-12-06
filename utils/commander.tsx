@@ -92,7 +92,7 @@ export const repo = () => {
         window.open('https://github.com/joshguarino/term-web-deno', '_blank');
     }, 500);
     return [
-        <span>Opening repo code for site.</span>
+        <span>Opening repo code for terminal.</span>
     ]
 }
 
