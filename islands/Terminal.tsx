@@ -4,19 +4,20 @@ import Output from "../islands/Output.tsx";
 import Prompt from "../islands/Prompt.tsx";
 import { banner, commandExists, commandRouter } from "../utils/commander.tsx";
 import { highlightCommandExists } from "../utils/highlighter.tsx";
+import { List } from "../utils/linkedList.ts";
 import { historyEntry, terminalProps } from "../utils/types.ts";
 
 export default function Terminal(props: terminalProps) {
     const [input, setInput] = useState<string>('')
     const [commandHistory, setCommandHistory] = useState<string[]>(['banner'])
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
-    const [commIndex, setCommIndex] = useState<number>(0)
     const [user, setUser] = useState<string>(props.user)
     const [host, setHost] = useState<string>(props.host)
+    const [histList, setHistList] = useState<List>(new List('banner'))
 
     useEffect (() => {
         focusInput()
-    }, [input, commandHistory])
+    }, [input, commandHistory, histList])
 
     const focusInput = () => {
         document.getElementById('input')?.focus()
@@ -46,24 +47,17 @@ export default function Terminal(props: terminalProps) {
     }
 
     const handleArrowUp = () => {
-        if (commIndex > 0) {
-            setCommIndex(commIndex - 1)
-            setInput(commandHistory[commIndex])
+        if (histList.current === histList.tail && input !== histList.tail.data) {
+            setInput(histList.tail!.data)
             return
         }
-        setCommIndex(0)
-        setInput(commandHistory[0])
+        histList.traverseBack()
+        setInput(histList.current!.data)
     }
 
     const handleArrowDown = () => {
-        const lastIndex = commandHistory.length - 1
-        if (commIndex < lastIndex) {
-            setCommIndex(commIndex + 1)
-            setInput(commandHistory[commIndex])
-            return
-        }
-        setCommIndex(lastIndex)
-        setInput(commandHistory[lastIndex])
+        histList.traverseForward()
+        setInput(histList.current!.data)
     }
 
     const submitHandler = (command: string) => {
@@ -74,10 +68,10 @@ export default function Terminal(props: terminalProps) {
         }
         if (command !== '') {
             commandHistory.push(command)
+            histList.addNode(command)
         }
         outputHistory.push({command: command, output: output})
         input !== '' ? setInput('') : setCommandHistory([...commandHistory])
-        setCommIndex(commandHistory.length-1)
     }
 
     return (
