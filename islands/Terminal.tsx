@@ -56,6 +56,10 @@ export default function Terminal(props: terminalProps) {
     }
 
     const handleArrowDown = () => {
+        if (histList.current === histList.tail) {
+            setInput('')
+            return
+        }
         histList.traverseForward()
         setInput(histList.current!.data)
     }
