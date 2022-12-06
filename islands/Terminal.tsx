@@ -9,7 +9,6 @@ import { historyEntry, terminalProps } from "../utils/types.ts";
 
 export default function Terminal(props: terminalProps) {
     const [input, setInput] = useState<string>('')
-    const [commandHistory, setCommandHistory] = useState<string[]>(['banner'])
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
     const [user, setUser] = useState<string>(props.user)
     const [host, setHost] = useState<string>(props.host)
@@ -17,7 +16,7 @@ export default function Terminal(props: terminalProps) {
 
     useEffect (() => {
         focusInput()
-    }, [input, commandHistory, histList])
+    }, [input, histList])
 
     const focusInput = () => {
         document.getElementById('input')?.focus()
@@ -71,11 +70,10 @@ export default function Terminal(props: terminalProps) {
             setOutputHistory([])
         }
         if (command !== '') {
-            commandHistory.push(command)
             histList.addNode(command)
         }
         outputHistory.push({command: command, output: output})
-        input !== '' ? setInput('') : setCommandHistory([...commandHistory])
+        input !== '' ? setInput('') : setOutputHistory([...outputHistory])
     }
 
     return (
