@@ -1,4 +1,4 @@
-import { highlightBlue, highlightBoxBlue, highlightBoxRed, highlightBoxWhite, highlightRed } from "./highlighter.tsx"
+import { highlightBoxBlue, highlightBoxRed } from "./highlighter.tsx"
 import config from "../config.json" assert { type: "json" };
 
 export enum Commands {

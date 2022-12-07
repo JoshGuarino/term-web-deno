@@ -1,4 +1,4 @@
-import { highlightBlue, highlightBoxBlue, highlightBoxRed, highlightRed } from "../utils/highlighter.tsx";
+import { highlightBlue, highlightRed } from "../utils/highlighter.tsx";
 import { propmptProps } from "../utils/types.ts";
 
 export default function Prompt(props: propmptProps) {

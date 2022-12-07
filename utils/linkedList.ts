@@ -10,7 +10,7 @@ export class ListNode {
     }
 }
 
-export class List {
+export class LinkedList {
     head: ListNode
     tail: ListNode
     current: ListNode | null
