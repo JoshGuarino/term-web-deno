@@ -11,7 +11,6 @@ export default function Terminal(props: terminalProps) {
     const [input, setInput] = useState<string>('')
     const [outputHistory, setOutputHistory] = useState<Array<historyEntry>>([{command: 'banner', output: banner()}])
     const [user, setUser] = useState<string>(props.user)
-    const [host, setHost] = useState<string>(props.host)
     const [commandHistory, setCommandHistory] = useState<LinkedList>(new LinkedList('banner'))
 
     useEffect (() => {
@@ -78,8 +77,8 @@ export default function Terminal(props: terminalProps) {
 
     return (
         <span class="outline-none" onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>
-            <Output history={outputHistory} user={user} host={host} />
-            <Prompt user={user} host={host} />{highlightCommandExists(input)}<Caret />
+            <Output history={outputHistory} user={user} host={props.host} />
+            <Prompt user={user} host={props.host} />{highlightCommandExists(input)}<Caret />
         </span>
     )
 }

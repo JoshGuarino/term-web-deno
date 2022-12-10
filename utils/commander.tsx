@@ -1,4 +1,4 @@
-import { highlightBoxBlue, highlightBoxRed } from "./highlighter.tsx"
+import { highlightBlue, highlightBoxBlue, highlightBoxRed, highlightRed } from "./highlighter.tsx"
 import config from "../config.json" assert { type: "json" };
 
 export enum Commands {
@@ -10,7 +10,8 @@ export enum Commands {
     linkedin = 'Opens linkedin profile page.',
     github = 'Opens github profile page.',
     repo = 'See the code for this application.',
-    date = 'Display current datetime.'
+    date = 'Display current datetime.',
+    sudo = 'Run command as superuser'
 }
 
 export const commandExists = (command: string) => {
@@ -38,6 +39,8 @@ export const commandRouter = (command: string) => {
             return repo()
         case 'date':
             return date()
+        case 'sudo':
+            return sudo()
         default:
             return [<></>]
     }
@@ -59,7 +62,7 @@ export const banner = () => {
 
 export const about = () => {
     return [
-        <h2>Hi I'm {highlightBoxRed('Josh Guarino')}, I'm a Software Engineer!</h2>,
+        <h2>Hi I'm {highlightRed('Josh Guarino')}, I'm a Software Engineer!</h2>,
     ]
 }
 
@@ -74,7 +77,7 @@ export const linkedin = () => {
         window.open(`https://www.linkedin.com/in/${config.social.linkedin}`, '_blank');
     }, 500);
     return [
-        <span>Opening linkedin profile page.</span>
+        <span>Opening {highlightBlue('linkedin')} profile page.</span>
     ]
 }
 
@@ -83,7 +86,7 @@ export const github = () => {
         window.open(`https://github.com/${config.social.github}`, '_blank');
     }, 500);
     return [
-        <span>Opening github profile page.</span>
+        <span>Opening {highlightBlue('github')} profile page.</span>
     ]
 }
 
@@ -92,7 +95,7 @@ export const repo = () => {
         window.open('https://github.com/joshguarino/term-web-deno', '_blank');
     }, 500);
     return [
-        <span>Opening repo code for terminal.</span>
+        <span>Opening {highlightRed('repo')} code for terminal.</span>
     ]
 }
 
@@ -101,3 +104,13 @@ export const date = () => {
         <span>{new Date().toString()}</span>
     ]
 }
+
+export const sudo = () => {
+    setTimeout(() => {
+        window.open('https://www.youtube.com/watch?v=ZNJVE9slmOA', '_blank');
+    }, 500);
+    return [
+        <span>{highlightBoxRed(config.host)} You didn't say the magic word!</span>
+    ]
+}
+
