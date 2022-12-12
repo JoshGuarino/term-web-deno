@@ -16,7 +16,7 @@ export enum Commands {
 
 export const commandExists = (command: string) => {
     if (command === '') return true
-    return command in Commands
+    return command.split('\xa0')[0] in Commands
 }
 
 export const commandRouter = (command: string) => {
@@ -75,7 +75,7 @@ export const whoami = () => {
 export const linkedin = () => {
     setTimeout(() => {
         window.open(`https://www.linkedin.com/in/${config.social.linkedin}`, '_blank');
-    }, 500);
+    }, 500)
     return [
         <span>Opening {highlightBlue('linkedin')} profile page.</span>
     ]
@@ -84,7 +84,7 @@ export const linkedin = () => {
 export const github = () => {
     setTimeout(() => {
         window.open(`https://github.com/${config.social.github}`, '_blank');
-    }, 500);
+    }, 500)
     return [
         <span>Opening {highlightBlue('github')} profile page.</span>
     ]
@@ -93,7 +93,7 @@ export const github = () => {
 export const repo = () => {
     setTimeout(() => {
         window.open('https://github.com/joshguarino/term-web-deno', '_blank');
-    }, 500);
+    }, 500)
     return [
         <span>Opening {highlightRed('repo')} code for terminal.</span>
     ]
@@ -108,7 +108,7 @@ export const date = () => {
 export const sudo = () => {
     setTimeout(() => {
         window.open('https://www.youtube.com/watch?v=ZNJVE9slmOA', '_blank');
-    }, 500);
+    }, 500)
     return [
         <span>{highlightBoxRed(config.host)} Permission denied.</span>
     ]

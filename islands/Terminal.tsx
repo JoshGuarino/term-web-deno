@@ -15,6 +15,7 @@ export default function Terminal(props: terminalProps) {
 
     useEffect (() => {
         focusInput()
+        console.log(input.split('\xa0').filter(x => x !== ''))
     }, [input, commandHistory])
 
     const focusInput = () => {
@@ -75,10 +76,17 @@ export default function Terminal(props: terminalProps) {
         input !== '' ? setInput('') : setOutputHistory([...outputHistory])
     }
 
+    const displayInput = (command: string) => {
+        const commandArgs =  command.split('\xa0')
+        return <span>{highlightCommandExists(commandArgs[0])}{command.slice(commandArgs[0].length, command.length)}</span>
+    }
+
     return (
         <span class="outline-none" onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>
             <Output history={outputHistory} user={user} host={props.host} />
-            <Prompt user={user} host={props.host} />{highlightCommandExists(input)}<Caret />
+            <Prompt user={user} host={props.host} />
+            {displayInput(input)}
+            <Caret />
         </span>
     )
 }
