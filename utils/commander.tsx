@@ -110,7 +110,7 @@ export const sudo = () => {
         window.open('https://www.youtube.com/watch?v=ZNJVE9slmOA', '_blank');
     }, 500);
     return [
-        <span>{highlightBoxRed(config.host)} permission denied.</span>
+        <span>{highlightBoxRed(config.host)} Permission denied.</span>
     ]
 }
 
