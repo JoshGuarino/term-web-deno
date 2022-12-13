@@ -14,6 +14,8 @@ export enum Commands {
     sudo = 'Run command as superuser'
 }
 
+const noArgCommands = ['clear', 'help', 'banner', 'about', 'whoami', 'linkedin', 'github', 'repo', 'date']
+
 export const commandExists = (command: string) => {
     if (command === '') return true
     return command in Commands

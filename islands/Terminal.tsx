@@ -66,7 +66,7 @@ export default function Terminal(props: terminalProps) {
         let output = [<></>]
         const commandArgs = command.split('\xa0').filter(x => x !== '')
         commandExists(command) ? output = commandRouter(commandArgs) : setInput('')
-        if (commandArgs[0] === 'clear') {
+        if (commandArgs[0] === 'clear' && commandArgs.length === 1) {
             setOutputHistory([])
         }
         if (command !== '') {
