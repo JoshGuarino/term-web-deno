@@ -19,4 +19,5 @@ This will watch the project directory and restart as necessary.
 
 ## Notes
 - Still a little buggy on firefox for focusing the input and mobile doesn't work.
+- Fix scrolling to bottom on submitting command.
 - Will eventually make modular for anyone to use with a simple `config.json`.
