@@ -16,10 +16,11 @@ export enum Commands {
 
 export const commandExists = (command: string) => {
     if (command === '') return true
-    return command.split('\xa0')[0] in Commands
+    return command in Commands
 }
 
-export const commandRouter = (command: string) => {
+export const commandRouter = (commandArgs: string[]) => {
+    const command = commandArgs[0]
     switch(command) {
         case 'clear':
             return [<></>]
@@ -46,7 +47,7 @@ export const commandRouter = (command: string) => {
     }
 }
 
-export const help = () => {
+const help = () => {
     return Object.keys(Commands).map((command) => (
         <span>{highlightBoxBlue(command)} {Commands[command as keyof typeof Commands]}</span>
     ))
@@ -60,19 +61,19 @@ export const banner = () => {
     ]
 }
 
-export const about = () => {
+const about = () => {
     return [
         <h2>Hi I'm {highlightRed('Josh Guarino')}, I'm a Software Engineer!</h2>,
     ]
 }
 
-export const whoami = () => {
+const whoami = () => {
     return [
         highlightBoxBlue('guest')
     ]
 }
 
-export const linkedin = () => {
+const linkedin = () => {
     setTimeout(() => {
         window.open(`https://www.linkedin.com/in/${config.social.linkedin}`, '_blank');
     }, 500)
@@ -81,7 +82,7 @@ export const linkedin = () => {
     ]
 }
 
-export const github = () => {
+const github = () => {
     setTimeout(() => {
         window.open(`https://github.com/${config.social.github}`, '_blank');
     }, 500)
@@ -90,7 +91,7 @@ export const github = () => {
     ]
 }
 
-export const repo = () => {
+const repo = () => {
     setTimeout(() => {
         window.open('https://github.com/joshguarino/term-web-deno', '_blank');
     }, 500)
@@ -99,13 +100,13 @@ export const repo = () => {
     ]
 }
 
-export const date = () => {
+const date = () => {
     return [
         <span>{new Date().toString()}</span>
     ]
 }
 
-export const sudo = () => {
+const sudo = () => {
     setTimeout(() => {
         window.open('https://www.youtube.com/watch?v=ZNJVE9slmOA', '_blank');
     }, 500)

@@ -15,7 +15,6 @@ export default function Terminal(props: terminalProps) {
 
     useEffect (() => {
         focusInput()
-        console.log(input.split('\xa0').filter(x => x !== ''))
     }, [input, commandHistory])
 
     const focusInput = () => {
@@ -65,8 +64,9 @@ export default function Terminal(props: terminalProps) {
 
     const submitHandler = (command: string) => {
         let output = [<></>]
-        commandExists(command) ? output = commandRouter(command) : setInput('')
-        if (command === 'clear') {
+        const commandArgs = command.split('\xa0').filter(x => x !== '')
+        commandExists(command) ? output = commandRouter(commandArgs) : setInput('')
+        if (commandArgs[0] === 'clear') {
             setOutputHistory([])
         }
         if (command !== '') {
