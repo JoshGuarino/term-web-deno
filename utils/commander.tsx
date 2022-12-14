@@ -23,6 +23,15 @@ export const commandExists = (command: string) => {
 
 export const commandRouter = (commandArgs: string[]) => {
     const command = commandArgs[0]
+
+    console.log(noArgCommands.includes(command) && commandArgs.length > 1)
+
+    if (noArgCommands.includes(command) && commandArgs.length > 1) {
+        return [
+            <span>{highlightBoxRed(config.host)} Command {highlightBlue(command)} takes no arguments.</span>
+        ]
+    }
+
     switch(command) {
         case 'clear':
             return [<></>]
