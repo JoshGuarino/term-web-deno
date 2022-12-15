@@ -11,7 +11,8 @@ export enum Commands {
     github = 'Opens github profile page.',
     repo = 'See the code for this application.',
     date = 'Display current datetime.',
-    sudo = 'Run command as superuser'
+    sudo = 'Run command as superuser',
+    echo = 'Print out text to temrinal.'
 }
 
 const noArgCommands = ['clear', 'help', 'banner', 'about', 'whoami', 'linkedin', 'github', 'repo', 'date']
@@ -23,9 +24,6 @@ export const commandExists = (command: string) => {
 
 export const commandRouter = (commandArgs: string[]) => {
     const command = commandArgs[0]
-
-    console.log(noArgCommands.includes(command) && commandArgs.length > 1)
-
     if (noArgCommands.includes(command) && commandArgs.length > 1) {
         return [
             <span>{highlightBoxRed(config.host)} Command {highlightBlue(command)} takes no arguments.</span>
@@ -53,13 +51,15 @@ export const commandRouter = (commandArgs: string[]) => {
             return date()
         case 'sudo':
             return sudo()
+        case 'echo':
+            return echo(commandArgs)
         default:
             return [<></>]
     }
 }
 
 const help = () => {
-    return Object.keys(Commands).map((command) => (
+    return Object.keys(Commands).map(command => (
         <span>{highlightBoxBlue(command)} {Commands[command as keyof typeof Commands]}</span>
     ))
 }
@@ -126,3 +126,9 @@ const sudo = () => {
     ]
 }
 
+const echo = (commandArgs: string[]) => {
+    commandArgs.shift()
+    return [
+        <span>{commandArgs.map(arg => `${arg} `)}</span>
+    ]
+}
