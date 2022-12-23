@@ -12,7 +12,7 @@ export enum Commands {
     repo = 'See the code for this application.',
     date = 'Display current datetime.',
     sudo = 'Run command as superuser',
-    echo = 'Print out text to temrminal.',
+    echo = 'Print out text to terminal.',
     joke = 'Hear a programming joke.'
 }
 
