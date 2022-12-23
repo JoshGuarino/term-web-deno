@@ -16,7 +16,7 @@ export enum Commands {
     joke = 'Hear a programming joke.'
 }
 
-const noArgCommands = ['clear', 'help', 'banner', 'about', 'whoami', 'linkedin', 'github', 'repo', 'date']
+const noArgCommands = ['clear', 'help', 'banner', 'about', 'whoami', 'linkedin', 'github', 'repo', 'date', 'joke']
 
 export const commandExists = (command: string) => {
     if (command === '') return true
