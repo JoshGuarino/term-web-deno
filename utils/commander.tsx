@@ -12,7 +12,8 @@ export enum Commands {
     repo = 'See the code for this application.',
     date = 'Display current datetime.',
     sudo = 'Run command as superuser',
-    echo = 'Print out text to temrinal.'
+    echo = 'Print out text to temrinal.',
+    joke = 'Hear a programming joke.'
 }
 
 const noArgCommands = ['clear', 'help', 'banner', 'about', 'whoami', 'linkedin', 'github', 'repo', 'date']
@@ -22,7 +23,7 @@ export const commandExists = (command: string) => {
     return command in Commands
 }
 
-export const commandRouter = (commandArgs: string[]) => {
+export const commandRouter = async (commandArgs: string[]) => {
     const command = commandArgs[0]
     if (noArgCommands.includes(command) && commandArgs.length > 1) {
         return [
@@ -53,6 +54,8 @@ export const commandRouter = (commandArgs: string[]) => {
             return sudo()
         case 'echo':
             return echo(commandArgs)
+        case 'joke':
+            return await joke()
         default:
             return [<></>]
     }
@@ -130,5 +133,17 @@ const echo = (commandArgs: string[]) => {
     commandArgs.shift()
     return [
         <span>{commandArgs.map(arg => `${arg} `)}</span>
+    ]
+}
+
+const joke = async () => {
+    const response = await fetch('/api/joke')
+    if (response.status !== 200) {
+        return [
+            <span>{highlightBoxRed(config.host)} Error, status code of {highlightRed(String(response.status))}.</span>
+        ]
+    }
+    return [
+        <span>{await response.text()}</span>
     ]
 }
