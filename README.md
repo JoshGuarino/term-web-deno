@@ -1,4 +1,4 @@
-# [JG | Terminal](https://jg-term.deno.dev/)
+# [JG | Terminal](https://jg-terminal.deno.dev/)
 
 ## My attempt on a terminal style website 
 <br/>
