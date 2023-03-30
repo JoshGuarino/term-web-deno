@@ -25,6 +25,7 @@ export default function Terminal(props: terminalProps) {
         if (event.key.length === 1) {
             setInput(input + event.key)
         }
+        playAudio('click')
 
         switch (event.code) {
             case 'Backspace':
