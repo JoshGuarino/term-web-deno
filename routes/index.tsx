@@ -9,7 +9,8 @@ export default function Home() {
         <title>JG | Terminal</title>
       </Head>
       <body 
-        class="bg-gradient-to-b from-gray-800 to-red-900 h-screen p-6 text-white font-bold justify-evenly items-center bg-cover"
+        class="from-gray-800 to-red-900 h-screen p-6 text-white font-bold justify-evenly items-center bg-cover"
+        style="background-image: url(futurecity2.png);"
       >
         <div class="bg-black opacity-80 border-2 rounded-lg h-full w-full p-2 overflow-auto">
           <Terminal user={config.user} host={config.host}/>
