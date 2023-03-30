@@ -25,6 +25,7 @@ export default function Terminal(props: terminalProps) {
         if (event.key.length === 1) {
             setInput(input + event.key)
         }
+
         switch (event.code) {
             case 'Backspace':
                 setInput(input.slice(0, -1))
@@ -63,15 +64,30 @@ export default function Terminal(props: terminalProps) {
     }
 
     const submitHandler = async (command: string) => {
+        if (command === ''){
+            playAudio('error')
+            return
+        }
+
         let output = [<></>]
         const commandArgs = command.split('\xa0').filter(x => x !== '')
-        commandExists(commandArgs[0]) ? output = await commandRouter(commandArgs) : setInput('')
+        const validCommand = commandExists(commandArgs[0])
+
+        if (validCommand) {
+            output = await commandRouter(commandArgs)
+        } else {
+            setInput('')
+            playAudio('warning')
+        }
+
         if (commandArgs[0] === 'clear' && commandArgs.length === 1) {
             setOutputHistory([])
+            playAudio('ask')
+        } else if (validCommand) {
+            playAudio('assemble')
         }
-        if (command !== '') {
-            commandHistory.addNode(command)
-        }
+
+        commandHistory.addNode(command)
         outputHistory.push({command: command, output: output})
         input !== '' ? setInput('') : setOutputHistory([...outputHistory])
     }
@@ -79,6 +95,12 @@ export default function Terminal(props: terminalProps) {
     const displayInput = (command: string) => {
         const commandArgs =  command.split('\xa0')
         return <span>{highlightCommandExists(commandArgs[0])}{command.slice(commandArgs[0].length, command.length)}</span>
+    }
+
+    const playAudio = (sound: string) => {
+        const audio: HTMLAudioElement = document.createElement('audio')
+        audio.setAttribute('src', `sounds/${sound}.mp3`)
+        audio.play()
     }
 
     return (

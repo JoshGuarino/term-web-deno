@@ -7,16 +7,14 @@ export default function Output(props: outputProps) {
     return(
         <div>
             {props.history.map( entry => (
-                    <div>
-                        <div>
-                            <Prompt user={props.user} host={props.host}/>{entry.command}
-                        </div>
-                            { 
-                                commandExists(entry.command.split('\xa0')[0]) ?
-                                entry.output.map(entry => <div class="m-4">{entry}</div>) :
-                                <div class="m-4">{highlightBoxRed(props.host)} Command {highlightRed(entry.command)} not found, type {highlightBlue('help')} for commands.</div>
-                            }
-                    </div>
+                    <div class="mb-2">
+                        { 
+                            commandExists(entry.command.split('\xa0')[0]) ?
+                            entry.output.map(entry => <div class="m-4">{entry}</div>) :
+                            <div class="m-4">{highlightBoxRed(props.host)} Command {highlightRed(entry.command)} not found, type {highlightBlue('help')} for commands.</div>
+                        }
+                        { entry.command === '' ? <></> : <hr></hr> }
+                    </div>   
                 )
             )}
         </div>
