@@ -121,11 +121,9 @@ const date = () => {
 }
 
 const sudo = () => {
-    setTimeout(() => {
-        window.open('https://www.youtube.com/watch?v=ZNJVE9slmOA', '_blank');
-    }, 500)
     return [
-        <span>{highlightBoxRed(config.host)} Permission denied.</span>
+        <span>{highlightBoxRed(config.host)} Permission denied.</span>,
+        <img class="border-2 rounded-xl" src="dennis-jurassic-park.gif" alt="dennis" /> 
     ]
 }
 

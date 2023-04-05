@@ -25,7 +25,6 @@ export default function Terminal(props: terminalProps) {
         if (event.key.length === 1) {
             setInput(input + event.key)
         }
-        playAudio('click')
 
         switch (event.code) {
             case 'Backspace':
@@ -84,6 +83,9 @@ export default function Terminal(props: terminalProps) {
         if (commandArgs[0] === 'clear' && commandArgs.length === 1) {
             setOutputHistory([])
             playAudio('ask')
+        } 
+        else if (commandArgs[0] === 'sudo') {
+            playAudio('ahahah')
         } else if (validCommand) {
             playAudio('assemble')
         }
