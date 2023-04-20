@@ -19,6 +19,7 @@ export default function Terminal(props: terminalProps) {
 
     const focusInput = () => {
         document.getElementById('input')?.focus()
+        document.getElementById('terminal')?.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" })
     }
 
     const inputHandler = (event: KeyboardEvent) => {
@@ -107,11 +108,13 @@ export default function Terminal(props: terminalProps) {
     }
 
     return (
-        <span class="outline-none" onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>
-            <Output history={outputHistory} user={user} host={props.host} />
-            <Prompt user={user} host={props.host} />
-            {displayInput(input)}
-            <Caret />
-        </span>
+        <div id="terminal" class="bg-black opacity-80 border-2 rounded-lg h-full w-full p-2 overflow-auto">
+            <span class="outline-none" onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>
+                <Output history={outputHistory} user={user} host={props.host} />
+                <Prompt user={user} host={props.host} />
+                {displayInput(input)}
+                <Caret />
+            </span>
+        </div>
     )
 }

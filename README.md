@@ -18,5 +18,5 @@ This will watch the project directory and restart as necessary.
 <br /><br />
 
 ## Todo
-- Fix scrolling to bottom on submitting command.
+- loading screen.
 - Add typing effect on submit.
