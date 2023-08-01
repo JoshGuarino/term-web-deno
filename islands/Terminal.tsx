@@ -1,11 +1,12 @@
 import { useEffect, useState } from "preact/hooks";
 import { Caret } from "../components/Caret.tsx";
 import Output from "../islands/Output.tsx";
+import Input from "./Input.tsx";
 import Prompt from "../islands/Prompt.tsx";
 import { banner, commandExists, commandRouter } from "../utils/commander.tsx";
-import { highlightCommandExists } from "../utils/highlighter.tsx";
 import { LinkedList } from "../utils/linkedList.ts";
 import { historyEntry, terminalProps } from "../utils/types.ts";
+import { playAudio } from "../utils/audio.ts"
 
 export default function Terminal(props: terminalProps) {
     const [input, setInput] = useState<string>('')
@@ -96,23 +97,12 @@ export default function Terminal(props: terminalProps) {
         input !== '' ? setInput('') : setOutputHistory([...outputHistory])
     }
 
-    const displayInput = (command: string) => {
-        const commandArgs =  command.split('\xa0')
-        return <span>{highlightCommandExists(commandArgs[0])}{command.slice(commandArgs[0].length, command.length)}</span>
-    }
-
-    const playAudio = (sound: string) => {
-        const audio: HTMLAudioElement = document.createElement('audio')
-        audio.setAttribute('src', `sounds/${sound}.mp3`)
-        audio.play()
-    }
-
     return (
         <div id="terminal" class="bg-black opacity-80 border-2 rounded-lg h-full w-full p-2 overflow-auto">
             <span class="outline-none" onKeyDown={inputHandler} id="input" tabIndex={0} onBlur={focusInput}>
                 <Output history={outputHistory} user={user} host={props.host} />
                 <Prompt user={user} host={props.host} />
-                {displayInput(input)}
+                <Input command={input}></Input>
                 <Caret />
             </span>
         </div>

@@ -9,6 +9,10 @@ export interface outputProps {
     host: string
 }
 
+export interface inputProps {
+    command: string
+}
+
 export interface propmptProps {
     user: string
     host: string

@@ -16,6 +16,8 @@ export enum Commands {
     joke = 'Hear a programming joke.'
 }
 
+// export const Commands = new Map()
+
 const noArgCommands = ['clear', 'help', 'banner', 'about', 'whoami', 'linkedin', 'github', 'repo', 'date', 'joke']
 
 export const commandExists = (command: string) => {

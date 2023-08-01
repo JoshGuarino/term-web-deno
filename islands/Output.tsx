@@ -1,4 +1,3 @@
-import Prompt from "../islands/Prompt.tsx";
 import { commandExists } from "../utils/commander.tsx";
 import { highlightBlue, highlightBoxRed, highlightRed } from "../utils/highlighter.tsx";
 import { outputProps } from "../utils/types.ts";
