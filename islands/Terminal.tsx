@@ -6,7 +6,7 @@ import Prompt from "../islands/Prompt.tsx";
 import { banner, commandExists, commandRouter } from "../utils/commander.tsx";
 import { LinkedList } from "../utils/linkedList.ts";
 import { historyEntry, terminalProps } from "../utils/types.ts";
-import { playAudio } from "../utils/audio.ts"
+import Audio, { playAudio } from "../utils/audio.tsx"
 
 export default function Terminal(props: terminalProps) {
     const [input, setInput] = useState<string>('')
@@ -104,6 +104,7 @@ export default function Terminal(props: terminalProps) {
                 <Prompt user={user} host={props.host} />
                 <Input command={input}></Input>
                 <Caret />
+                <Audio/>
             </span>
         </div>
     )
